@@ -4,7 +4,7 @@ metadata:
   name: precatorio-dev-app
 spec:
   destination:
-    namespace: precatorio-dev
+    namespace: precatorios-dev
     server: https://kubernetes.default.svc
   project: default
   source:
