@@ -1,0 +1,17 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: precatorio-dev-app
+spec:
+  destination:
+    namespace: precatorio-dev
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    path: documentation/modules/ROOT/lab/precatorio-dev
+    repoURL: https://github.com/danielbraga/openshift-gitops-workshop
+    targetRevision: demo-workshop
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: false
