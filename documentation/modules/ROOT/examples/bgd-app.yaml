@@ -4,12 +4,12 @@ metadata:
   name: bgd-app
 spec:
   destination:
-    namespace: user$USERNUM-bgd
+    namespace: user1-bgd
     server: https://kubernetes.default.svc
   project: default
   source:
     path: documentation/modules/ROOT/examples/bgd
-    repoURL: https://github.com/openshiftdemos/openshift-gitops-workshop
+    repoURL: https://github.com/danielbraga/openshift-gitops-workshop
     targetRevision: demo-workshop
   syncPolicy:
     automated:

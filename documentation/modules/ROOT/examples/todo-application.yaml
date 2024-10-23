@@ -4,13 +4,13 @@ metadata:
   name: todo-app
 spec:
   destination:
-    namespace: user$USERNUM-todo
+    namespace: user1-todo
     server: https://kubernetes.default.svc
   project: default
   source:
     path: documentation/modules/ROOT/examples/todo
-    repoURL: https://github.com/openshiftdemos/openshift-gitops-workshop
-    targetRevision: master
+    repoURL: https://github.com/danielbraga/openshift-gitops-workshop
+    targetRevision: demo-workshop
   syncPolicy:
     automated:
       prune: true
