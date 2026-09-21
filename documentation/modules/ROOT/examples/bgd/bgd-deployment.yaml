@@ -24,6 +24,16 @@ spec:
         env:
         - name: COLOR
           value: "blue"
+        - name: DB_USER_FOO2
+          valueFrom:
+            secretKeyRef:
+              name: demo-secret-0.8.1
+              key: foo2
+        - name: DB_USER_FOO3
+          valueFrom:
+            secretKeyRef:
+              name: demo-secret-0.8.1
+              key: foo3
         resources: {}
         securityContext:
           allowPrivilegeEscalation: false
