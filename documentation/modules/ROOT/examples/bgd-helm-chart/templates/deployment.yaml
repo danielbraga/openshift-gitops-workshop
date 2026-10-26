@@ -15,6 +15,12 @@ spec:
       labels:
         app: {{ .Release.Name }}
     spec:
+      {{- with .Values.volumes }}
+      volumes:
+        - name: {{ .Values.volumes.name }}
+          persistentVolumeClaim:
+            claimName: {{ .Values.volumes.pvc }}
+      {{- end }}
       containers:
       - image: {{ .Values.image.name }}:{{ .Values.image.tag }}
         imagePullPolicy: {{ .Values.image.pullPolicy }}
