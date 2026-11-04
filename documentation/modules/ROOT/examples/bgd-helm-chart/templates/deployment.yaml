@@ -15,12 +15,6 @@ spec:
       labels:
         app: {{ .Release.Name }}
     spec:
-      {{- with .Values.volumes }}
-      volumes:
-        - name: {{ .Values.volumes.name }}
-          persistentVolumeClaim:
-            claimName: {{ .Values.volumes.pvc }}
-      {{- end }}
       containers:
       - image: {{ .Values.image.name }}:{{ .Values.image.tag }}
         imagePullPolicy: {{ .Values.image.pullPolicy }}
@@ -28,12 +22,20 @@ spec:
         env:
         - name: COLOR
           value: {{ .Values.color }}
+        {{- with .Values.volumeMounts }}
+        volumeMounts:
+          {{- toYaml . | nindent 10 }}
+        {{- end }}
         resources: {}
         securityContext:
           allowPrivilegeEscalation: false
           capabilities:
             drop:
             - ALL
+      {{- with .Values.volumes }}
+      volumes:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
       securityContext:
         runAsNonRoot: true
         seccompProfile:
