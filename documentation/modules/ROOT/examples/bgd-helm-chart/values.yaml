@@ -6,7 +6,7 @@ image:
   tag: "1.0.0"
   pullPolicy: IfNotPresent
 
-vvvolumes:
+volumes:
   name: teste2-pvc
   pvc: teste-pvc
 
