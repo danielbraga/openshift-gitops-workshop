@@ -34,7 +34,9 @@ spec:
             - ALL
       {{- with .Values.volumes }}
       volumes:
-        {{- toYaml . | nindent 8 }}
+        - name: {{ .Values.volumes.name | default "default-name" }}
+          persistentVolumeClaim:
+            claimName: {{ .Values.volumes.pvc | default "teste-pvc" }}
       {{- end }}
       securityContext:
         runAsNonRoot: true
