@@ -1,3 +1,5 @@
+{{- $environment := .Values.environment -}}
+
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -22,22 +24,14 @@ spec:
         env:
         - name: COLOR
           value: {{ .Values.color }}
-        {{- with .Values.volumeMounts }}
-        volumeMounts:
-          {{- toYaml . | nindent 10 }}
-        {{- end }}
+        - name: ENVIRONMENT
+          value: {{ if or (eq $environment "hml") (eq $environment "dev") }}external-secrets.io/v1{{ else }}external-secrets.io/v1beta1{{ end }}
         resources: {}
         securityContext:
           allowPrivilegeEscalation: false
           capabilities:
             drop:
             - ALL
-      {{- with .Values.volumes }}
-      volumes:
-        - name: {{ .Values.volumes.name | default "default-name" }}
-          persistentVolumeClaim:
-            claimName: {{ .Values.volumes.pvc | default "teste-pvc" }}
-      {{- end }}
       securityContext:
         runAsNonRoot: true
         seccompProfile:
